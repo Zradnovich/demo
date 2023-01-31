@@ -87,8 +87,8 @@ public class LocalAdapterToTXT implements IAdapter {
 
             }
         };
-        if (executorSender instanceof ScheduledExecutorService executorServiceSE) {
-             executorServiceSE.scheduleAtFixedRate(toFile, 1, 2, TimeUnit.SECONDS);
+        if (executorSender instanceof ScheduledExecutorService ) {
+            ((ScheduledExecutorService)executorSender).scheduleAtFixedRate(toFile, 1, 2, TimeUnit.SECONDS);
         } else {
             executorSender.execute(toFile);
         }

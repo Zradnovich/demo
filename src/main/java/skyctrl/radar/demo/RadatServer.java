@@ -100,8 +100,8 @@ public class RadatServer implements IRadarServer{
     @Override
     public void stop() {
         isRunning.getAndSet(false);
-        executor.close();
-        executorAdapters.close();
+        //executor.close();
+        //executorAdapters.close();
     }
 
 }

@@ -8,11 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class App {
 	private static App instance;
 	private static ConfigurableApplicationContext ctx;
-	/*public static DemoApplication getInstance(){
-		return instance;
-	}
 
-	 */
 	public static ConfigurableApplicationContext getCTX(){
 		return App.ctx;
 	}
