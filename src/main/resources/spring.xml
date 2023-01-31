@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:application.properties</value>
+            </list>
+        </property>
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+    </bean>
+
+    <bean id="App" class="skyctrl.radar.demo.App">
+        <!--constructor-arg ref="client" />
+        <constructor-arg ref="cacheFileEventLogger" />
+        <constructor-arg ref="loggerMap"/-->
+    </bean>
+    <!--bean name="Generator" class="skyctrl.radar.demo.Generator1" init-method="send" depends-on="localServer">
+
+        <property name="port" value="${tcp.radarserver.port}"/>
+
+    </bean-->
+
+
+    <bean name="AdapterTXT1" class="skyctrl.radar.demo.LocalAdapterToTXT">
+        <property name="fileNameToWrite" value="log1.txt"></property>
+    </bean>
+    <!--bean name="AdapterTXT2" class="skyctrl.radar.demo.LocalAdapterToTXT">
+        <property name="fileNameToWrite" value="log2.txt"></property>
+    </bean-->
+
+    <bean id="localServer" name="localServerName" class="skyctrl.radar.demo.RadatServer"  init-method="start">
+        <property name="port" value="${tcp.radarserver.port}"></property>
+        <property name="adapters">
+            <list>
+                <ref bean="AdapterTXT1"/>
+                <!--ref bean="AdapterTXT2"/-->
+            </list>
+            <!--util:list value-type="skyctrl.radar.demo.IAdapter" list-class="java.util.ArrayList">
+                <ref bean="AdapterTXT1"/>
+                <ref bean="AdapterTXT2"/>
+            </util:list-->
+        </property>
+        <!--property name="port">
+            <value type="int">9876</value>
+        </property-->
+        <!--property name="isolation">
+            <util:constant static-field="java.sql.Connection.TRANSACTION_SERIALIZABLE"/>
+        </property-->
+    </bean>
+    <!--bean name="inboundChannel" class="org.springframework.integration.channel.DirectChannel">
+
+    </bean>
+    <bean name="serverConnectionFactory" class="org.springframework.integration.ip.tcp.connection.TcpNioServerConnectionFactory">
+        <constructor-arg index="0" value="${tcp.radar.server.port}" />
+        <property name="usingDirectBuffers" value="true"/>
+    </bean>
+
+    <bean name="inboundGateway" class="org.springframework.integration.ip.tcp.TcpInboundGateway">
+        <property name="connectionFactory" ref="serverConnectionFactory"/>
+        <property name="requestChannel" ref="inboundChannel"/>
+    </bean-->
+
+</beans>
