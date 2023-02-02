@@ -22,23 +22,24 @@ public class LocalTableAdapter extends JFrame implements IAdapter{
             msg = src.split(",");
             timeMoment = System.currentTimeMillis();
             id=msg[14];
-            H=msg[3];
+
+            H=""+Math.round(Double.parseDouble(msg[1])*Math.sin(Double.parseDouble(msg[4])*Math.PI/180));
             DateTime = dateFormat.format(new Date(timeMoment));
             Lat = msg[18];
             Long = msg[19];
-            Speed = msg[7];
-            RCS = msg[8];
+            //Speed = msg[7];
+            //RCS = msg[8];
             Classification = msg[12];
         }
         Object[] getRowData(){
-            Object[] result=new Object[7];
+            Object[] result=new Object[5];
 
             int i=0;
             result[i++]  = id;
             result[i++]  = H;
             result[i++]  = ""+Lat+","+Long;
-            result[i++]  = Speed;
-            result[i++]  = RCS;
+            //result[i++]  = Speed;
+            //result[i++]  = RCS;
             result[i++]  = Classification;
             result[i++]  = DateTime;
             return result;
@@ -50,7 +51,7 @@ public class LocalTableAdapter extends JFrame implements IAdapter{
     private DefaultTableModel model;
     private ExecutorService executorService;
     private String[] headers = new String[]{
-            "id","H","Lat,Long","Speed","RCS","Classification","DateTime"};
+            "id","H","Lat,Long","Classification","DateTime"};
     public LocalTableAdapter(){
         store = new ArrayDeque<>() ;
         millisToHold = 1000*60*2;
