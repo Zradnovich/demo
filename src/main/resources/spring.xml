@@ -24,13 +24,13 @@
         <constructor-arg ref="cacheFileEventLogger" />
         <constructor-arg ref="loggerMap"/-->
     </bean>
-    <bean name="Generator" class="skyctrl.radar.demo.Generator1" init-method="send" depends-on="localServer">
+    <!--bean name="Generator" class="skyctrl.radar.demo.Generator1" init-method="send" depends-on="localServer">
 
         <property name="port" value="${tcp.radarserver.port}"/>
         <property name="fileNameSrc" value="log2.txt"/>
 
 
-    </bean>
+    </bean-->
 
 
     <bean name="AdapterTXT1" class="skyctrl.radar.demo.LocalAdapterToTXT">
